@@ -45,10 +45,10 @@ public class Date extends Object {
 	
 	public void checkdate() throws IllegalDateException{
 		if(this.day<1 || this.day > check_days_in_month()) {
-			throw new IllegalDateException("IllegalDateException");
+			throw new IllegalDateException(String.format("falsches Datum: %s: illegal day (> %d)", this.toString(),check_days_in_month() ));
 		}
 		else if (this.month<1 || this.month > 12) {
-			throw new IllegalDateException("IllegalDateException");
+			throw new IllegalDateException(String.format("falsches Datum: %s: illegal month", this.toString()));
 		}
 	}
 	

@@ -9,17 +9,18 @@ public class DateTest {
 		int[][] testdata = {
 			{1, 5, 2013},	
 			{82, 38, 2013},
-			{31,2,2012},
+			{29,13,1995},
 		};
 		PrintWriter out = new PrintWriter(System.out, true);
 		for (int i = 0; i < testdata.length; i++) {
+			
 			try {
 				Date date = new Date(testdata[i][0], testdata[i][1], testdata[i][2]);
-				out.printf("Datum: %s %n", date.toString());
+				out.printf("korrektes Datum: %s %n", date.toString());
 				
 			}
 			catch (IllegalDateException e) {
-				out.println("Error: IllegalDateEception");
+				out.println(e.toString());
 				continue;
 			}
 			
