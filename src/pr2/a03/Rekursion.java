@@ -75,37 +75,29 @@ public class Rekursion {
 	}
 
 	public static int indexOfRecursiv(int number, int[] array) {
-		return indexOfRecursiv(number, array, 0, array.length-1);
+		return indexOfRecursiv(number, array, 0, array.length - 1);
 	}
 
 	public static int indexOfRecursiv(int number, int[] array, int startIndex, int endIndex) {
-		int m= (startIndex+endIndex)/2;
-		if(endIndex<startIndex) {
+		int m = (startIndex + endIndex) / 2;
+		if (endIndex < startIndex) {
 			return -1;
 		}
-		
-		if(number==array[m]) {
-	        return m;
-		}
-		else if(number<array[m]){
-			return indexOfRecursiv(number,array,startIndex,m-1);
-		}
-		else {
-			return indexOfRecursiv(number,array,m+1,endIndex); 
-		}
 
-
-		// devide array in two halves
-		// if number is greater look in second half
-		// if number is smaller look in first halt
-		// terminate if m is < 0
+		if (number == array[m]) {
+			return m;
+		} else if (number < array[m]) {
+			return indexOfRecursiv(number, array, startIndex, m - 1);
+		} else {
+			return indexOfRecursiv(number, array, m + 1, endIndex);
+		}
 	}
 
-	public  void test() {
+	public void test() {
 		PrintWriter out = new PrintWriter(System.out, true);
 		int[] array = createArrayDirectFrom("1 2 3 4 5 6 7 8 9 10 11");
-		for (int i: array) {
-			out.printf("number %d at index: %d \n ", i,indexOfRecursiv(i,array));
+		for (int i : array) {
+			out.printf("number %d at index: %d \n ", i, indexOfRecursiv(i, array));
 		}
 		out.close();
 	}
@@ -113,8 +105,8 @@ public class Rekursion {
 	public void test(File dir) {
 		PrintWriter out = new PrintWriter(System.out, true);
 		int[] array = createArray(dir.getPath());
-		for (int i: array) {
-			out.printf("number %d at index: %d \n", i,indexOfRecursiv(i,array));
+		for (int i : array) {
+			out.printf("number %d at index: %d \n", i, indexOfRecursiv(i, array));
 		}
 		out.close();
 	}
