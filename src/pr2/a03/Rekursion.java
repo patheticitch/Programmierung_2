@@ -11,11 +11,10 @@ import java.util.Scanner;
 public class Rekursion {
 
 	public static void main(String[] args) {
-		Rekursion testcase = new Rekursion();
-		//testcase.test();
-		File testfile = new File("./lib/test.txt/");
-		testcase.test(testfile);
-		
+		Rekursion testclass = new Rekursion();
+		File testfile = new File("./lib/test.txt");
+		testclass.test(testfile);
+
 	}
 
 	public static int[] createArray(Scanner in) {
@@ -24,8 +23,7 @@ public class Rekursion {
 		while (in.hasNext()) {
 			try {
 				list.add(in.nextInt());
-			}
-			catch(InputMismatchException e) {
+			} catch (InputMismatchException e) {
 				in.next();
 			}
 		}
@@ -47,7 +45,7 @@ public class Rekursion {
 		} catch (FileNotFoundException fnf) {
 			System.out.println("file not found");
 			return new int[0];
-			
+
 		}
 
 	}
@@ -77,26 +75,37 @@ public class Rekursion {
 	}
 
 	public static int indexOfRecursiv(int number, int[] array) {
-		return indexOfRecursiv(number, array, 0, array.length - 1);
+		return indexOfRecursiv(number, array, 0, array.length-1);
 	}
 
 	public static int indexOfRecursiv(int number, int[] array, int startIndex, int endIndex) {
-		int m = (startIndex + endIndex) / 2;
-		if (m > array.length) {
+		int m= (startIndex+endIndex)/2;
+		if(endIndex<startIndex) {
 			return -1;
-		} else if (array[m] == number) {
-			return m;
-		} else if (array[m] < number) {
-			return indexOfRecursiv(number, array, startIndex += m, endIndex);
 		}
-		return indexOfRecursiv(number, array, startIndex, endIndex -= m);
+		
+		if(number==array[m]) {
+	        return m;
+		}
+		else if(number<array[m]){
+			return indexOfRecursiv(number,array,startIndex,m-1);
+		}
+		else {
+			return indexOfRecursiv(number,array,m+1,endIndex); 
+		}
+
+
+		// devide array in two halves
+		// if number is greater look in second half
+		// if number is smaller look in first halt
+		// terminate if m is < 0
 	}
 
-	public void test() {
+	public  void test() {
 		PrintWriter out = new PrintWriter(System.out, true);
-		int[] array = createArrayDirectFrom("1 2 3 4 5");
-		for (int i : array) {
-			out.printf("number: %d index: %d \n ", i, indexOfRecursiv(i, array));
+		int[] array = createArrayDirectFrom("1 2 3 4 5 6 7 8 9 10 11");
+		for (int i: array) {
+			out.printf("number %d at index: %d \n ", i,indexOfRecursiv(i,array));
 		}
 		out.close();
 	}
@@ -104,7 +113,9 @@ public class Rekursion {
 	public void test(File dir) {
 		PrintWriter out = new PrintWriter(System.out, true);
 		int[] array = createArray(dir.getPath());
-		out.println(indexOfRecursiv(2,array));
+		for (int i: array) {
+			out.printf("number %d at index: %d \n", i,indexOfRecursiv(i,array));
+		}
 		out.close();
 	}
 }
